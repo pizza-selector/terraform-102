@@ -6,9 +6,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "env-variable"
-    key    = "terraform/state.tf"
-    region = "us-east-1"
+    bucket       = "env-variable"
+    key          = "terraform/state.tf"
+    region       = "us-east-1"
     use_lockfile = true
   }
 }
