@@ -5,6 +5,12 @@ terraform {
       version = "~> 5.0"
     }
   }
+  backend "s3" {
+    bucket = "env-variable"
+    key    = "terraform/state.tf"
+    region = "us-east-1"
+    use_lockfile = true
+  }
 }
 
 # Configure the AWS Provider
