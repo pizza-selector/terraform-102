@@ -27,10 +27,10 @@ jobs:
        shell: bash
  
    steps:
-     - name: Checkout the repository to the runner
+     - name: Checkout the repository
        uses: actions/checkout@v2
  
-     - name: Setup Terraform with specified version on the runner
+     - name: Setup Terraform with specified version
        uses: hashicorp/setup-terraform@v3
        with:
          terraform_version: 1.8.2
@@ -54,7 +54,7 @@ jobs:
        run: terraform plan -no-color -input=false
        continue-on-error: true    
 
-     - uses: actions/github-script@v6
+     - uses: actions/github-script@v7
        if: github.event_name == 'pull_request'
        env:
          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
