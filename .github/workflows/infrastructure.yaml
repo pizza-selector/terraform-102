@@ -146,8 +146,11 @@ jobs:
     - name: Publish Terraform Plan to Task Summary
       env:
         SUMMARY: ${{ steps.tf-plan-string.outputs.summary }}
+        CHANGES: ${{ steps.tf-plan.outputs.exitcode }}
       run: |
         echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+        echo "CHANGES"  >> $GITHUB_STEP_SUMMARY
+        echo "$CHANGES"  >> $GITHUB_STEP_SUMMARY
                 
  terraform-apply-prod:
    name: 'Terraform Apply - PROD'
