@@ -24,5 +24,6 @@ resource "aws_instance" "web" {
 
   tags = {
     Name = "HelloWorld"
+    Environment = var.environment
   }
 }
