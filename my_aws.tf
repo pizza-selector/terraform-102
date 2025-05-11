@@ -26,4 +26,12 @@ resource "aws_instance" "web" {
     Name        = "HelloWorld - ${var.environment}"
     Environment = var.environment
   }
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to ami, because after the instance is created it
+      # will have a proper ami assigned, like "ami-0f88e80871fd81e91"
+      ami,
+    ]
+  }
 }
