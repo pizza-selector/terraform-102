@@ -1,4 +1,4 @@
-# Terraform 102 video materials
+# Terraform 103 video materials
 
 Materials for the [Terraform 102: How to Apply from GitHub Actions](https://youtu.be/NGEPe0z00VA) youtube video.
 
