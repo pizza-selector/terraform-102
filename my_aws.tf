@@ -23,7 +23,7 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro" // free tier eligible
 
   tags = {
-    Name = "HelloWorld"
+    Name = "HelloWorld - ${var.environment}"
     Environment = var.environment
   }
 }
