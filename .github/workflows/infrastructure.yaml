@@ -89,10 +89,8 @@ jobs:
   env:
     AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
     AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
-  outputs:
-    tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
 
-  steps:    
+  steps:
     - name: Checkout
       uses: actions/checkout@v4
 
@@ -108,18 +106,7 @@ jobs:
 
     - name: Terraform Plan
       id: tf-plan
-      run: |
-        export exitcode=0
-        terraform plan -var-file=variables/prod.json -detailed-exitcode -no-color -out tfplan-prod || export exitcode=$?
-
-        echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
-        
-        if [ $exitcode -eq 1 ]; then
-          echo Terraform Plan Failed!
-          exit 1
-        else 
-          exit 0
-        fi
+      run: terraform plan -var-file=variables/prod.json -no-color -out tfplan-prod
         
     - name: Publish Terraform Plan
       uses: actions/upload-artifact@v4
@@ -149,12 +136,10 @@ jobs:
         CHANGES: ${{ steps.tf-plan.outputs.exitcode }}
       run: |
         echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
-        echo "CHANGES"  >> $GITHUB_STEP_SUMMARY
-        echo "$CHANGES"  >> $GITHUB_STEP_SUMMARY
                 
  terraform-apply-prod:
    name: 'Terraform Apply - PROD'
-   if: github.ref == 'refs/heads/main' && needs.terraform-plan-prod.outputs.tfplanExitCode == 2
+   if: github.ref == 'refs/heads/main'
    runs-on: ubuntu-latest
    environment: PROD
    env:
