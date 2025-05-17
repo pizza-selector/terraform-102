@@ -43,7 +43,7 @@ jobs:
 
      - name: Trivy check
        id: trivy
-       run: docker run -v $PWD:/tf aquasec/trivy config /tf  
+       run: docker run -v $PWD:/tf aquasec/trivy config --exit-code 1 --severity HIGH,CRITICAL /tf  
 
      - name: Terraform plan
        id: plan       
