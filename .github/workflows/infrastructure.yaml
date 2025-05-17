@@ -39,7 +39,11 @@ jobs:
     
      - name: Terraform validate
        id: validate
-       run: terraform validate 
+       run: terraform validate
+
+     - name: Trivy check
+       id: trivy
+       run: docker run -v $PWD:/tf aquasec/trivy config /tf  
 
      - name: Terraform plan
        id: plan       
