@@ -1,4 +1,4 @@
-name: "Terraform 103 - Pipeline" 
+name: "Terraform 104 - Trivy" 
 
 on:
  push:
