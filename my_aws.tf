@@ -27,6 +27,10 @@ resource "aws_instance" "web" {
     Environment = var.environment
   }
 
+  metadata_options {
+    http_tokens = "required"
+  }
+
   lifecycle {
     ignore_changes = [
       # Ignore changes to ami, because after the instance is created it
